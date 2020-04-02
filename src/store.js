@@ -1,12 +1,12 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import thunk from 'redux-thunk'
 
-import tipReducer from './reducers/tipReducer';
+import tipReducer from './reducers/tipReducer'
 
 const reducer = combineReducers({
-    tips: tipReducer
-});
+  tips: tipReducer
+})
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk))
 
-export default store;
+export default store
