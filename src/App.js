@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { initTips } from './reducers/tipReducer'
+import { initTips } from './reducers/tipReducer';
 
-import AddTip from './components/AddTip'
-import TipList from './components/TipList'
+import AddTip from './components/AddTip';
+import TipList from './components/TipList';
 
 const App = props => {
   useEffect(() => {
     if (props.tips.processing) {
-      props.initTips()
+      props.initTips();
     }
-  }, [])
+  }, []);
 
   return (
     <div className="App">
@@ -23,7 +23,7 @@ const App = props => {
         <Route exact path="/" render={() => <TipList />} />
       </div>
     </div>
-  )
+  );
 }
 
 const mapStateToProps = state => {
