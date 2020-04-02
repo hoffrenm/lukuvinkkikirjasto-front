@@ -1,0 +1,9 @@
+node_modules
+build
+__mocks__
+cypress
+
+**/*test.js
+**/*Tests.js
+**/serviceWorker.js
+

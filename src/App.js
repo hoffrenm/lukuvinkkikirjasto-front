@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { initTips } from './reducers/tipReducer';
 
-export default App;
+import AddTip from './components/AddTip';
+import TipList from './components/TipList';
+
+const App = (props) => {
+
+    useEffect(() => {
+        if ( props.tips.processing ) {
+            props.initTips();
+        }
+    });
+
+    return (
+        <div className="App">
+            <Router>
+                <h1 className="heading heading__h1">Lukuvinkkikirjasto</h1>
+                <div className="content-container">
+                    <Route exact path="/add-tip" render={ () =>
+                        <AddTip />
+                    }
+                    />
+
+                    <Route exact path="/" render={() =>
+                        <TipList />
+                    }
+                    />
+                </div>
+            </Router>
+        </div>
+    );
+};
+
+const mapStateToProps = (state) => {
+    return {
+        tips: state.tips
+    };
+};
+
+const connectedApp = connect(
+    mapStateToProps,
+    {
+        initTips,
+    })(App);
+export default connectedApp;
