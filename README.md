@@ -1,12 +1,17 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Sivut
 
-In the project directory, you can run:
+Vinkkilistaus: http://localhost:3000/
+Lisää vinkki http://localhost:3000/add-tip
+
+## Komennot
+
+Projektikansiossa:
 
 ### `npm run eslint`
 
-Run eslint.
+Ajaa eslintin.
 
 ### `npm start`
 
