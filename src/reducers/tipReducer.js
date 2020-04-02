@@ -1,14 +1,28 @@
 import tipService from '../services/tips'
 
 export const initTips = () => {
-  return async dispatch => {
-    const tips = await tipService.getAll()
-    dispatch({
-      type: 'INIT_TIPS',
-      data: tips
-    })
-  }
-}
+    return async dispatch => {
+        const result = await tipService.getAll();
+  
+        dispatch({
+            type: 'INIT_TIPS',
+        });
+
+        if (result) {
+            dispatch({
+                type: 'ACTION_SUCCESS',
+                name: 'list',
+                data: result
+            });
+        } else {
+            dispatch({
+                type: 'ACTION_FAIL',
+                data: result,
+                name: 'add'
+            });
+        }
+    };
+};
 
 export const addTip = (e, tip) => {
   return async dispatch => {
@@ -65,6 +79,7 @@ const tipReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.name]: false,
+        tipdata: action.data,
         processing: false,
         error: null
       }
