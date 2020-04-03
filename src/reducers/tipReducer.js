@@ -28,8 +28,12 @@ export const addTip = (e, tip) => {
   return async dispatch => {
     e.preventDefault()
 
+    console.log("addTip: tip", tip)
+
     const result = await tipService.create(tip)
     const newTip = result
+
+    console.log("addTip: result", result)
 
     dispatch({
       type: 'ADD_TIP',
@@ -68,6 +72,7 @@ const tipReducer = (state = initialState, action) => {
         tipdata: action.data
       }
     case 'ADD_TIP':
+      console.log("tipReducer: action.data", action.data)
       return {
         ...state,
         tipdata: [...state.tipdata, action.data],

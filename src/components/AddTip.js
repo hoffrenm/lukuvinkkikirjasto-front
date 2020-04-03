@@ -4,8 +4,10 @@ import { addTip } from '../reducers/tipReducer'
 import { useField } from '../hooks/index'
 
 const AddTip = props => {
-  const title = useField('text')
-  const url = useField('text')
+  const newTitle = useField('text')
+  const newUrl = useField('text')
+  // const title = useField('text')
+  // const url = useField('text'
 
   const removeReset = ({ reset: _, ...clone }) => clone
 
@@ -15,18 +17,20 @@ const AddTip = props => {
       <form
         onSubmit={e =>
           props.addTip(e, {
-            title: title.value,
-            url: url.value
+            title: newTitle.value,
+            url: newUrl.value
+            // title: title.value,
+            // url: url.value
           })
         }
       >
         <div>
           <label>Otsikko</label>
-          <input data-cy="tip-title" id="tip_title" {...removeReset(title)} />
+          <input data-cy="tip-title" id="tip_title" {...removeReset(newTitle)} />
         </div>
         <div>
           <label>Linkki</label>
-          <input data-cy="tip-url" id="tip_url" {...removeReset(url)} />
+          <input data-cy="tip-url" id="tip_url" {...removeReset(newUrl)} />
         </div>
         <button
           className="button button-primary button-submit"
