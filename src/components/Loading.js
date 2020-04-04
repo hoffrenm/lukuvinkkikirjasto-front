@@ -1,7 +1,5 @@
-import React from 'react';
+import React from 'react'
 
-const Loading = () => (
-    <div>Lataillaan...</div>
-);
+const Loading = () => <div>Lataillaan...</div>
 
-export default Loading;
+export default Loading

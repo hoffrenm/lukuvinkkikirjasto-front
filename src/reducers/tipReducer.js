@@ -1,57 +1,57 @@
 import tipService from '../services/tips'
 
 export const initTips = () => {
-    return async dispatch => {
-        const result = await tipService.getAll();
-  
-        dispatch({
-            type: 'INIT_TIPS',
-        });
+  return async (dispatch) => {
+    const result = await tipService.getAll()
 
-        if (result) {
-            dispatch({
-                type: 'ACTION_SUCCESS',
-                name: 'list',
-                data: result
-            });
-        } else {
-            dispatch({
-                type: 'ACTION_FAIL',
-                data: result,
-                name: 'add'
-            });
-        }
-    };
-};
+    dispatch({
+      type: 'INIT_TIPS',
+    })
+
+    if (result) {
+      dispatch({
+        type: 'ACTION_SUCCESS',
+        name: 'list',
+        data: result,
+      })
+    } else {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: result,
+        name: 'add',
+      })
+    }
+  }
+}
 
 export const addTip = (e, tip) => {
-  return async dispatch => {
+  return async (dispatch) => {
     e.preventDefault()
 
-    console.log("addTip: tip", tip)
+    console.log('addTip: tip', tip)
 
     const result = await tipService.create(tip)
     const newTip = result
 
-    console.log("addTip: result", result)
+    console.log('addTip: result', result)
 
     dispatch({
       type: 'ADD_TIP',
       data: newTip,
-      name: 'add'
+      name: 'add',
     })
 
     if (result) {
       dispatch({
         type: 'ACTION_SUCCESS',
         name: 'add',
-        data: newTip
+        data: newTip,
       })
     } else {
       dispatch({
         type: 'ACTION_FAIL',
         data: tip,
-        name: 'add'
+        name: 'add',
       })
     }
   }
@@ -60,7 +60,7 @@ export const addTip = (e, tip) => {
 const initialState = {
   tipdata: [],
   processing: true,
-  error: null
+  error: null,
 }
 
 const tipReducer = (state = initialState, action) => {
@@ -69,16 +69,16 @@ const tipReducer = (state = initialState, action) => {
       return {
         ...state,
         processing: true,
-        tipdata: action.data
+        tipdata: action.data,
       }
     case 'ADD_TIP':
-      console.log("tipReducer: action.data", action.data)
+      console.log('tipReducer: action.data', action.data)
       return {
         ...state,
         tipdata: [...state.tipdata, action.data],
         processing: true,
         newTitle: '',
-        newUrl: ''
+        newUrl: '',
       }
     case 'ACTION_SUCCESS':
       return {
@@ -86,13 +86,13 @@ const tipReducer = (state = initialState, action) => {
         [action.name]: false,
         tipdata: action.data,
         processing: false,
-        error: null
+        error: null,
       }
     case 'ACTION_FAIL':
       return {
         ...state,
         error: action.name,
-        processing: false
+        processing: false,
       }
     default:
       return state

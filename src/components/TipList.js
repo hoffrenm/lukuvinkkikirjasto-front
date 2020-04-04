@@ -1,29 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 // import { Link } from 'react-router-dom';
-import Loading from './Loading';
-import NoTips from './NoTips';
+import Loading from './Loading'
+import NoTips from './NoTips'
 
-const TipList = props => {
-    const {
-        processing,
-        tipdata
-    } = props.tips;
+const TipList = (props) => {
+  const { processing, tipdata } = props.tips
 
-    if (processing) {
-        return <Loading />
-    }
+  if (processing) {
+    return <Loading />
+  }
 
-    if ( tipdata.length === 0 ) {
-        return <NoTips />
-    }
+  if (tipdata.length === 0) {
+    return <NoTips />
+  }
 
-    console.log("TipList: tipdata", tipdata)
+  console.log('TipList: tipdata', tipdata)
 
   return (
     <div>
       <h2>Lukuvinkit</h2>
-      {tipdata.map(tip => {
+      {tipdata.map((tip) => {
         return (
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
@@ -36,9 +33,9 @@ const TipList = props => {
   )
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    tips: state.tips
+    tips: state.tips,
   }
 }
 
