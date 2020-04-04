@@ -1,3 +1,5 @@
+# Lukuvinkkikirjaston frontend [![CircleCI](https://circleci.com/gh/hoffrenm/lukuvinkkikirjasto-front.svg?style=shield)](https://circleci.com/gh/hoffrenm/lukuvinkkikirjasto-front)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Sivut
