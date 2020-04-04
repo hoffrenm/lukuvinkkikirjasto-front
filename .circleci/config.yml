@@ -28,3 +28,5 @@ jobs:
       - run: npm run test
 
       - run: npm run build
+
+      - run: ./node_modules/.bin/codecov
