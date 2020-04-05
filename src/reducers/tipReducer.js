@@ -2,23 +2,22 @@ import tipService from '../services/tips'
 
 export const initTips = () => {
   return async (dispatch) => {
-    const result = await tipService.getAll()
-
+    
     dispatch({
       type: 'INIT_TIPS',
     })
 
-    if (result) {
+    const result = await tipService.getAll()
+
+    if (result.status === 200) {
       dispatch({
         type: 'ACTION_SUCCESS',
-        name: 'list',
-        data: result,
+        data: result.data,
       })
     } else {
       dispatch({
         type: 'ACTION_FAIL',
         data: result,
-        name: 'add',
       })
     }
   }
@@ -28,30 +27,21 @@ export const addTip = (e, tip) => {
   return async (dispatch) => {
     e.preventDefault()
 
-    console.log('addTip: tip', tip)
-
-    const result = await tipService.create(tip)
-    const newTip = result
-
-    console.log('addTip: result', result)
-
     dispatch({
-      type: 'ADD_TIP',
-      data: newTip,
-      name: 'add',
+      type: 'ADD_TIP'
     })
 
-    if (result) {
+    const result = await tipService.create(tip)
+
+    if (result.status === 200) {
       dispatch({
         type: 'ACTION_SUCCESS',
-        name: 'add',
-        data: newTip,
+        data: result.data
       })
     } else {
       dispatch({
         type: 'ACTION_FAIL',
-        data: tip,
-        name: 'add',
+        data: result
       })
     }
   }
@@ -68,31 +58,25 @@ const tipReducer = (state = initialState, action) => {
     case 'INIT_TIPS':
       return {
         ...state,
-        processing: true,
-        tipdata: action.data,
+        processing: true
       }
     case 'ADD_TIP':
-      console.log('tipReducer: action.data', action.data)
       return {
         ...state,
-        tipdata: [...state.tipdata, action.data],
         processing: true,
-        newTitle: '',
-        newUrl: '',
       }
     case 'ACTION_SUCCESS':
       return {
         ...state,
-        [action.name]: false,
-        tipdata: action.data,
+        tipdata: state.tipdata = state.tipdata.concat(action.data),
         processing: false,
-        error: null,
+        error: null
       }
     case 'ACTION_FAIL':
       return {
         ...state,
-        error: action.name,
-        processing: false,
+        error: action.data,
+        processing: false
       }
     default:
       return state
