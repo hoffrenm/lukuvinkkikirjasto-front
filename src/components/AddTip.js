@@ -3,39 +3,42 @@ import { connect } from 'react-redux'
 import { addTip } from '../reducers/tipReducer'
 import { useField } from '../hooks/index'
 
-const AddTip = (props) => {
-  const newTitle = useField('text')
-  const newUrl = useField('text')
-  // const title = useField('text')
-  // const url = useField('text'
+const AddTip =  (props) => {
+  const title = useField('text')
+  const url = useField('text')
 
   // eslint-disable-next-line
   const removeReset = ({ reset: _, ...clone }) => clone
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    props.addTip(e, {
+      title: title.value,
+      url: url.value
+    })
+    title.reset()
+    url.reset()
+  }
+
   return (
     <div className="form form--add-tip">
       <h3>Lisää vinkki</h3>
-      <form
-        onSubmit={(e) =>
-          props.addTip(e, {
-            title: newTitle.value,
-            url: newUrl.value,
-            // title: title.value,
-            // url: url.value
-          })
-        }
-      >
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Otsikko</label>
           <input
             data-cy="tip-title"
             id="tip_title"
-            {...removeReset(newTitle)}
+            {...removeReset(title)}
           />
         </div>
         <div>
           <label>Linkki</label>
-          <input data-cy="tip-url" id="tip_url" {...removeReset(newUrl)} />
+          <input
+            data-cy="tip-url"
+            id="tip_url"
+            {...removeReset(url)}
+          />
         </div>
         <button
           className="button button-primary button-submit"
@@ -51,8 +54,6 @@ const AddTip = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    newTitle: state.tips.newTitle,
-    newUrl: state.tips.newUrl,
   }
 }
 

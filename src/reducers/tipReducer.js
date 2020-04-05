@@ -32,7 +32,7 @@ export const addTip = (e, tip) => {
 
     const result = await tipService.create(tip)
 
-    if (result.status === 200) {
+    if (result.status === 201) {
       dispatch({
         type: 'ACTION_SUCCESS',
         data: result.data
@@ -65,9 +65,10 @@ const tipReducer = (state = initialState, action) => {
         processing: true,
       }
     case 'ACTION_SUCCESS':
+      const unsortedTips = state.tipdata.concat(action.data)
       return {
         ...state,
-        tipdata: state.tipdata.concat(action.data),
+        tipdata: unsortedTips.sort((a, b) => b.id - a.id),
         processing: false,
         error: null
       }
