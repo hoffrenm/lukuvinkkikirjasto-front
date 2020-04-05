@@ -6,8 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Sivut
 
-Vinkkilistaus: http://localhost:3000/
-Lisää vinkki http://localhost:3000/add-tip
+Lisää vinkki ja vinkkilistaus: http://localhost:3000/
 
 ## Komennot
 
