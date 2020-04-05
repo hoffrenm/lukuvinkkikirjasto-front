@@ -2,7 +2,6 @@ import tipService from '../services/tips'
 
 export const initTips = () => {
   return async (dispatch) => {
-    
     dispatch({
       type: 'INIT_TIPS',
     })
