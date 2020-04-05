@@ -67,7 +67,7 @@ const tipReducer = (state = initialState, action) => {
     case 'ACTION_SUCCESS':
       return {
         ...state,
-        tipdata: state.tipdata = state.tipdata.concat(action.data),
+        tipdata: state.tipdata.concat(action.data),
         processing: false,
         error: null
       }
