@@ -52,7 +52,7 @@ const AddTip =  (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {
   }
 }

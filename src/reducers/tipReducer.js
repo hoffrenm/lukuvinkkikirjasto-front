@@ -65,7 +65,7 @@ const tipReducer = (state = initialState, action) => {
         processing: true,
       }
     case 'ACTION_SUCCESS':
-      const unsortedTips = state.tipdata.concat(action.data)
+      var unsortedTips = state.tipdata.concat(action.data)
       return {
         ...state,
         tipdata: unsortedTips.sort((a, b) => b.id - a.id),
