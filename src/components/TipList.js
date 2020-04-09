@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { Link } from 'react-router-dom';
+import { removeTip } from '../reducers/tipReducer'
 import Loading from './Loading'
 import NoTips from './NoTips'
 
@@ -17,14 +17,22 @@ const TipList = (props) => {
 
   console.log('TipList: tipdata', tipdata)
 
+  const byReverseId = (b, a) => a.id - b.id
+
+  const deleteTip = async (tip) => {
+    const ok = window.confirm(`Poistetaanko lukuvinkki '${tip.title}'?`)
+    if (ok)
+      props.removeTip(tip.id)
+  }
+
   return (
     <div>
       <h2>Lukuvinkit</h2>
-      {tipdata.map((tip) => {
+      {tipdata.sort(byReverseId).map((tip) => {
         return (
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
-              {tip.title} - <a href={tip.url}>{tip.url}</a>
+              {tip.title} - <a href={tip.url}>{tip.url}</a> <button onClick={() => deleteTip(tip)}>Poista</button>
             </div>
           </div>
         )
@@ -39,5 +47,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const connectedTipList = connect(mapStateToProps)(TipList)
+const connectedTipList = connect(mapStateToProps, {
+  removeTip,
+})(TipList)
 export default connectedTipList
