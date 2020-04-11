@@ -31,7 +31,7 @@ export const addTip = (e, tip) => {
     })
 
     const result = await tipService.create(tip)
-    
+
     if (result.status === 201) {
       dispatch({
         type: 'ACTION_SUCCESS',

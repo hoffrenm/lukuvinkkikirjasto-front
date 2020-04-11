@@ -6,7 +6,6 @@ import TextInput from './TextInput'
 import Button from './Button'
 
 const AddTip =  (props) => {
-  
   const title = useField('text')
   const url = useField('text')
   const tags = useField('text')

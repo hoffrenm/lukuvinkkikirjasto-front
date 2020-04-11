@@ -34,15 +34,14 @@ const TipList = (props) => {
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
               <h3>{tip.title}</h3>
-              <a href={tip.url}>{tip.url}</a> 
-              <Button 
+              <a href={tip.url}>{tip.url}</a>
+              <Button
                 onClick={() => deleteTip(tip)}
-                buttonText='Poista' 
-                priority='secondary' 
+                buttonText='Poista'
+                priority='secondary'
                 type='button'
-                cyDataAttribute='remove-tip' 
-                />
-              
+                cyDataAttribute='remove-tip'
+              />
             </div>
           </div>
         )

@@ -1,7 +1,7 @@
 import React from 'react'
 
-const TextInput = ({label, inputValue}) => {
-    
+const TextInput = ({ label, inputValue }) => {
+
     // eslint-disable-next-line
     const removeReset = ({ reset: _, ...clone }) => clone
 
@@ -14,7 +14,7 @@ const TextInput = ({label, inputValue}) => {
                 {...removeReset(inputValue)}
             />
         </div>
-    ) 
-} 
+    )
+}
 
-export default TextInput;
+export default TextInput
