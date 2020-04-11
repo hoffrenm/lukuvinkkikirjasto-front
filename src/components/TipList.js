@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { removeTip } from '../reducers/tipReducer'
 import Loading from './Loading'
 import NoTips from './NoTips'
+import Button from './Button'
 
 const TipList = (props) => {
   const { processing, tipdata } = props.tips
@@ -32,7 +33,16 @@ const TipList = (props) => {
         return (
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
-              {tip.title} - <a href={tip.url}>{tip.url}</a> <button onClick={() => deleteTip(tip)}>Poista</button>
+              <h3>{tip.title}</h3>
+              <a href={tip.url}>{tip.url}</a> 
+              <Button 
+                onClick={() => deleteTip(tip)}
+                buttonText='Poista' 
+                priority='secondary' 
+                type='button'
+                cyDataAttribute='remove-tip' 
+                />
+              
             </div>
           </div>
         )
