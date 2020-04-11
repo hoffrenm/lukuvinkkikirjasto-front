@@ -15,7 +15,7 @@ const AddTip =  (props) => {
     props.addTip(e, {
       title: title.value,
       url: url.value,
-      tags: tags.value.split(',').filter(tag => tag.length > 0 && tag.trim())
+      tags: tags.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
     })
     title.reset()
     url.reset()
