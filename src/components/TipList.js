@@ -8,7 +8,7 @@ import Button from './Button'
 const TipList = (props) => {
   const { processing, tipdata } = props.tips
 
-  if (processing) {
+  if (processing && tipdata.length === 0) {
     return <Loading />
   }
 
@@ -35,6 +35,14 @@ const TipList = (props) => {
             <div className="tip-content">
               <h3>{tip.title}</h3>
               <a href={tip.url}>{tip.url}</a>
+              <div className="tip-item__meta tip-item__meta--tags">
+                {tip.tags.map((tag, index) => { return (
+                  <span key={`${index}-${tag}-${tip.id}`} className="tag_item">
+                    <span>{tag}</span>
+                    {(index !== tip.tags.length - 1) && <span className="sep">,</span>}
+                  </span>
+                )})}
+              </div>
               <Button
                 onClick={() => deleteTip(tip)}
                 buttonText='Poista'
