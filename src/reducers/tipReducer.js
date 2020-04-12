@@ -52,12 +52,14 @@ export const removeTip = (id) => {
       type: 'REMOVE_TIP'
     })
 
-    const result = await tipService.remove(id)
+    let result
+    try {
+      result = await tipService.remove(id)
+    } catch (error) {
+      result = error
+    }
 
-    // const result = 200
-    // if (result === 200) {
-
-    if (result.status === 200) {
+    if (result.status === 204) {
       dispatch({
         type: 'REMOVE_SUCCESS',
         data: id
