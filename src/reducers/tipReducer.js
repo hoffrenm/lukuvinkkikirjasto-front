@@ -1,5 +1,7 @@
 import tipService from '../services/tips'
 
+const formatTip = (tip) => ({ ...tip, createdAt: new Date(tip.createdAt) })
+
 export const initTips = () => {
   return async (dispatch) => {
     dispatch({
@@ -9,9 +11,11 @@ export const initTips = () => {
     const result = await tipService.getAll()
 
     if (result.status === 200) {
+      const formattedTips = result.data.map(formatTip)
+
       dispatch({
         type: 'ACTION_SUCCESS',
-        data: result.data,
+        data: formattedTips,
       })
     } else {
       dispatch({
@@ -27,20 +31,22 @@ export const addTip = (e, tip) => {
     e.preventDefault()
 
     dispatch({
-      type: 'ADD_TIP'
+      type: 'ADD_TIP',
     })
 
     const result = await tipService.create(tip)
 
     if (result.status === 201) {
+      const formattedTip = formatTip(result.data)
+
       dispatch({
         type: 'ACTION_SUCCESS',
-        data: result.data
+        data: formattedTip,
       })
     } else {
       dispatch({
         type: 'ACTION_FAIL',
-        data: result
+        data: result,
       })
     }
   }
@@ -49,7 +55,7 @@ export const addTip = (e, tip) => {
 export const removeTip = (id) => {
   return async (dispatch) => {
     dispatch({
-      type: 'REMOVE_TIP'
+      type: 'REMOVE_TIP',
     })
 
     let result
@@ -62,12 +68,12 @@ export const removeTip = (id) => {
     if (result.status === 204) {
       dispatch({
         type: 'REMOVE_SUCCESS',
-        data: id
+        data: id,
       })
     } else {
       dispatch({
         type: 'ACTION_FAIL',
-        data: result
+        data: result,
       })
     }
   }
@@ -84,7 +90,7 @@ const tipReducer = (state = initialState, action) => {
     case 'INIT_TIPS':
       return {
         ...state,
-        processing: true
+        processing: true,
       }
     case 'ADD_TIP':
       return {
@@ -96,14 +102,14 @@ const tipReducer = (state = initialState, action) => {
         ...state,
         tipdata: state.tipdata.concat(action.data),
         processing: false,
-        error: null
+        error: null,
       }
     case 'ACTION_FAIL':
       window.alert(`Toiminto epäonnistui (${action.data})`)
       return {
         ...state,
         error: action.data,
-        processing: false
+        processing: false,
       }
     case 'REMOVE_TIP':
       return {
@@ -113,9 +119,9 @@ const tipReducer = (state = initialState, action) => {
     case 'REMOVE_SUCCESS':
       return {
         ...state,
-        tipdata: state.tipdata.filter(tip => tip.id !== action.data),
+        tipdata: state.tipdata.filter((tip) => tip.id !== action.data),
         processing: false,
-        error: null
+        error: null,
       }
     default:
       return state
