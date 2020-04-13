@@ -33,6 +33,7 @@ const TipList = (props) => {
         return (
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
+              <div className="timestamp">{tip.createdAt.toLocaleString('fi-FI')}</div>
               <h3>{tip.title}</h3>
               <a href={tip.url}>{tip.url}</a>
               <div className="tip-item__meta tip-item__meta--tags">
