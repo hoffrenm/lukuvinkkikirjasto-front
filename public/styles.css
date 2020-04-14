@@ -38,6 +38,9 @@ input[type=text] {
     border-bottom: 1px solid #eee;
     padding: 1em 0;
 }
+.tip-content {
+    position: relative;
+}
 .tip-list-item h3 {
     margin: 0 0 .2em;
     font-size: 1em;
@@ -55,4 +58,9 @@ input[type=text] {
 .button-primary {
     background: dodgerblue;
     color: #fff;
+}
+.timestamp {
+    position: absolute;
+    top: 0;
+    right: 0;
 }

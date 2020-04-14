@@ -18,7 +18,7 @@ const TipList = (props) => {
 
   console.log('TipList: tipdata', tipdata)
 
-  const byReverseId = (b, a) => a.id - b.id
+  const byDescendingTime = (b, a) => a.createdAt - b.createdAt
 
   const deleteTip = async (tip) => {
     const ok = window.confirm(`Poistetaanko lukuvinkki '${tip.title}'?`)
@@ -29,10 +29,11 @@ const TipList = (props) => {
   return (
     <div>
       <h2>Lukuvinkit</h2>
-      {tipdata.sort(byReverseId).map((tip) => {
+      {tipdata.sort(byDescendingTime).map((tip) => {
         return (
           <div data-cy="tip-item" key={tip.id} className="tip-list-item">
             <div className="tip-content">
+              <div className="timestamp">{tip.createdAt.toLocaleString('fi-FI')}</div>
               <h3>{tip.title}</h3>
               <a href={tip.url}>{tip.url}</a>
               <div className="tip-item__meta tip-item__meta--tags">
