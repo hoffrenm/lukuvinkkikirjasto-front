@@ -12,9 +12,9 @@ const AddTip =  (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.addTip(e, {
-      title: title.value,
-      url: url.value,
+    props.addTip({
+      title: title.value.trim(),
+      url: url.value.trim(),
       tags: tags.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
     })
     title.reset()
