@@ -12,14 +12,16 @@ const AddTip =  (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.addTip(e, {
+    props.addTip({
       title: title.value,
       url: url.value,
       tags: tags.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
     })
-    title.reset()
-    url.reset()
-    tags.reset()
+    if (props.tips.error === null) {
+      title.reset()
+      url.reset()
+      tags.reset()
+    }
   }
 
   return (
@@ -35,8 +37,9 @@ const AddTip =  (props) => {
   )
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
   return {
+    tips: state.tips,
   }
 }
 

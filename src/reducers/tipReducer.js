@@ -26,15 +26,18 @@ export const initTips = () => {
   }
 }
 
-export const addTip = (e, tip) => {
+export const addTip = (tip) => {
   return async (dispatch) => {
-    e.preventDefault()
-
     dispatch({
       type: 'ADD_TIP',
     })
 
-    const result = await tipService.create(tip)
+    let result
+    try {
+      result = await tipService.create(tip)
+    } catch (error) {
+      result = error
+    }
 
     if (result.status === 201) {
       const formattedTip = formatTip(result.data)
