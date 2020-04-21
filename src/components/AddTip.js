@@ -17,11 +17,9 @@ const AddTip =  (props) => {
       url: url.value.trim(),
       tags: tags.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
     })
-    if (props.tips.error === null) {
-      title.reset()
-      url.reset()
-      tags.reset()
-    }
+    title.reset()
+    url.reset()
+    tags.reset()
   }
 
   return (
@@ -37,9 +35,8 @@ const AddTip =  (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
   return {
-    tips: state.tips,
   }
 }
 

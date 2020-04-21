@@ -32,24 +32,17 @@ export const addTip = (tip) => {
       type: 'ADD_TIP',
     })
 
-    let result
     try {
-      result = await tipService.create(tip)
-    } catch (error) {
-      result = error.response.data.error
-    }
-
-    if (result.status === 201) {
-      const formattedTip = formatTip(result.data)
+      const result = await tipService.create(tip)
 
       dispatch({
         type: 'ACTION_SUCCESS',
-        data: formattedTip,
+        data: formatTip(result.data),
       })
-    } else {
+    } catch (error) {
       dispatch({
         type: 'ACTION_FAIL',
-        data: result,
+        data: error.response.data.error,
       })
     }
   }
