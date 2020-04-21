@@ -36,7 +36,7 @@ export const addTip = (tip) => {
     try {
       result = await tipService.create(tip)
     } catch (error) {
-      result = error
+      result = error.response.data.error
     }
 
     if (result.status === 201) {

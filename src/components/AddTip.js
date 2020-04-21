@@ -13,8 +13,8 @@ const AddTip =  (props) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addTip({
-      title: title.value,
-      url: url.value,
+      title: title.value.trim(),
+      url: url.value.trim(),
       tags: tags.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
     })
     if (props.tips.error === null) {
