@@ -10,7 +10,7 @@ const TextInput = ({ label, inputValue }) => {
       <label>{label}</label>
       <input
         data-cy="tip-url"
-        id="tip_url"
+        id={`input-${label}`}
         {...removeReset(inputValue)}
       />
     </div>
