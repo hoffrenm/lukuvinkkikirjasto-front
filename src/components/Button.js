@@ -5,6 +5,7 @@ const Button = ({ buttonText, priority, type, cyDataAttribute, onClick }) => (
     <button
       className={`button button-${priority} button-${type}`}
       data-cy={cyDataAttribute}
+      id={`button-${cyDataAttribute}`}
       type={type}
       onClick={onClick}
     >
