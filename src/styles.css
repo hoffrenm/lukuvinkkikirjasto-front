@@ -48,6 +48,7 @@ input[type=text] {
 /* Buttons */
 .button__container {
     margin-top: .5em;
+    display: inline-block;
 }
 .button {
     border: 1px solid rgba(0,0,0,0.1);
@@ -62,5 +63,10 @@ input[type=text] {
 .timestamp {
     position: absolute;
     top: 0;
+    right: 0;
+}
+.timestamp-read {
+    position: absolute;
+    bottom: 0;
     right: 0;
 }

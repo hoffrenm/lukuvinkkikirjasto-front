@@ -1,1 +1,1 @@
-delete http://localhost:3000/api/tips/2
+delete http://localhost:5000/api/tips/2
