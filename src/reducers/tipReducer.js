@@ -1,6 +1,10 @@
 import tipService from '../services/tips'
 
-const formatTip = (tip) => ({ ...tip, createdAt: new Date(tip.createdAt) })
+const formatTip = (tip) => ({
+  ...tip,
+  createdAt: new Date(tip.createdAt),
+  readAt: tip.read ? new Date(tip.readAt) : null,
+})
 
 export const initTips = () => {
   return async (dispatch) => {
@@ -37,6 +41,28 @@ export const addTip = (tip) => {
 
       dispatch({
         type: 'ACTION_SUCCESS',
+        data: formatTip(result.data),
+      })
+    } catch (error) {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: error.response.data.error,
+      })
+    }
+  }
+}
+
+export const readTip = (id) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'READ_TIP',
+    })
+
+    try {
+      const result = await tipService.read(id)
+
+      dispatch({
+        type: 'READ_SUCCESS',
         data: formatTip(result.data),
       })
     } catch (error) {
@@ -119,6 +145,20 @@ const tipReducer = (state = initialState, action) => {
         processing: false,
         error: null,
       }
+    case 'READ_TIP':
+      return {
+        ...state,
+        processing: true,
+      }
+    case 'READ_SUCCESS': {
+      const readTip = action.data
+      return {
+        ...state,
+        tipdata: state.tipdata.map((tip) => tip.id === readTip.id ? readTip : tip),
+        processing: false,
+        error: null,
+      }
+    }
     default:
       return state
   }
