@@ -59,6 +59,41 @@ export const searchByTerms = (termData) => {
   }
 }
 
+export const searchByTag = (termData) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'INIT_SEARCH_TIPS',
+    })
+
+    let result
+
+    try {
+      if (termData.tag.length === 0) {
+        result = await tipService.getAll()
+      } else {
+        result = await tipService.getByTag(termData.tag)
+      }
+    } catch (error) {
+      result = error
+    }
+
+    if (result.status === 200) {
+      const formattedTips = result.data.map(formatTip)
+
+      dispatch({
+        type: 'SEARCH_TIPS_SUCCESS',
+        data: formattedTips,
+      })
+    } else {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: result,
+      })
+    }
+  }
+}
+
+
 export const removeSearchFilter = () => {
   return async (dispatch) => {
     dispatch({
