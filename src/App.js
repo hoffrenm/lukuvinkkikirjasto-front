@@ -18,9 +18,6 @@ const App = (props) => {
   }, [])
 
   const matchTip = useRouteMatch('/tips/:id/edit')
-  const matchingTip = matchTip
-    ? props.tips.tipdata.find((tip) => tip.id === Number(matchTip.params.id))
-    : null
 
   return (
     <div className="App">
@@ -28,7 +25,7 @@ const App = (props) => {
       <div className="content-container">
         <Switch>
           <Route path="/tips/:id/edit">
-            <EditTip tip={matchingTip} />
+            {matchTip ? <EditTip id={matchTip.params.id} /> : null}
           </Route>
           <Route
             path="/"
