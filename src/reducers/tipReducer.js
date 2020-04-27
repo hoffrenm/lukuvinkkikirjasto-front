@@ -166,6 +166,24 @@ export const removeTip = (id) => {
   }
 }
 
+export const updateTip = (id, tip) => {
+  return async (dispatch) => {
+    try {
+      const result = await tipService.update(id, tip)
+
+      dispatch({
+        type: 'UPDATE_TIP',
+        data: formatTip(result.data),
+      })
+    } catch (error) {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: error.response.data.error,
+      })
+    }
+  }
+}
+
 export const readTip = (id) => {
   return async (dispatch) => {
     dispatch({
@@ -263,9 +281,20 @@ const tipReducer = (state = initialState, action) => {
       const readTip = action.data
       return {
         ...state,
-        tipdata: state.tipdata.map((tip) => tip.id === readTip.id ? readTip : tip),
+        tipdata: state.tipdata.map((tip) =>
+          tip.id === readTip.id ? readTip : tip
+        ),
         processing: false,
         error: null,
+      }
+    }
+    case 'UPDATE_TIP': {
+      const updatedTip = action.data
+      return {
+        ...state,
+        tipdata: state.tipdata.map((tip) =>
+          tip.id !== updatedTip.id ? tip : updatedTip
+        ),
       }
     }
     case 'ACTION_FAIL':

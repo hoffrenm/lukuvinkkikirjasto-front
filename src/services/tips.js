@@ -17,6 +17,11 @@ const getByTag = async tag => {
   return response
 }
 
+const getById = async id => {
+  const response = await axios.get(`${baseUrl}/tips/${id}`)
+  return response
+}
+
 const create = async newObject => {
   const response = await axios.post(`${baseUrl}/tips`, newObject)
   return response
@@ -27,9 +32,14 @@ const remove = async id => {
   return response
 }
 
+const update = async (id, tip) => {
+  const response = await axios.put(`${baseUrl}/tips/${id}`, tip)
+  return response
+}
+
 const read = async id => {
   const response = await axios.post(`${baseUrl}/tips/${id}/read`)
   return response
 }
 
-export default { getAll, getByTitle, getByTag, create, remove, read }
+export default { getAll, getByTitle, getByTag, getById, create, remove, update, read }

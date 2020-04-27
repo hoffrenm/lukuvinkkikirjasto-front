@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
-import { Route /*, Switch */ } from 'react-router-dom'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { initTips } from './reducers/tipReducer'
 
+import EditTip from './components/EditTip'
 import AddTip from './components/AddTip'
 import TipList from './components/TipList'
 import SearchForm from './components/SearchForm'
@@ -16,20 +17,27 @@ const App = (props) => {
     // eslint-disable-next-line
   }, [])
 
+  const matchTip = useRouteMatch('/tips/:id/edit')
+
   return (
     <div className="App">
       <h1 className="heading heading__h1">Lukuvinkkikirjasto</h1>
       <div className="content-container">
-        <Route
-          path="/"
-          render={() => (
-            <>
-              <AddTip />
-              <SearchForm />
-              <TipList />
-            </>
-          )}
-        />
+        <Switch>
+          <Route path="/tips/:id/edit">
+            {matchTip ? <EditTip id={matchTip.params.id} /> : null}
+          </Route>
+          <Route
+            path="/"
+            render={() => (
+              <>
+                <AddTip />
+                <SearchForm />
+                <TipList />
+              </>
+            )}
+          />
+        </Switch>
       </div>
     </div>
   )
