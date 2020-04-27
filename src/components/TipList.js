@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { removeTip } from '../reducers/tipReducer'
+import Tip from './Tip'
 import Loading from './Loading'
 import NoTips from './NoTips'
-import Button from './Button'
+
 
 const TipList = (props) => {
   const { processing, tipdata } = props.tips
@@ -33,37 +34,7 @@ const TipList = (props) => {
       <div id="tip-list">
         {tipdata.sort(byDescendingTime).map((tip) => {
           return (
-            <div id="tip-list-item" data-cy="tip-item" key={tip.id} className="tip-list-item">
-              <div className="tip-content">
-                <div className="timestamp">
-                  {tip.createdAt.toLocaleString('fi-FI')}
-                </div>
-                <h3>{tip.title}</h3>
-                <a href={tip.url}>{tip.url}</a>
-                <div className="tip-item__meta tip-item__meta--tags">
-                  {tip.tags.map((tag, index) => {
-                    return (
-                      <span
-                        key={`${index}-${tag}-${tip.id}`}
-                        className="tag_item"
-                      >
-                        <span>{tag}</span>
-                        {index !== tip.tags.length - 1 && (
-                          <span className="sep">,</span>
-                        )}
-                      </span>
-                    )
-                  })}
-                </div>
-                <Button
-                  onClick={() => deleteTip(tip)}
-                  buttonText="Poista"
-                  priority="secondary"
-                  type="button"
-                  cyDataAttribute="remove-tip"
-                />
-              </div>
-            </div>
+            <Tip key={tip.id} tip={tip} deleteTip={deleteTip} />
           )
         })}
       </div>

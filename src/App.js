@@ -6,6 +6,7 @@ import { initTips } from './reducers/tipReducer'
 
 import AddTip from './components/AddTip'
 import TipList from './components/TipList'
+import SearchForm from './components/SearchForm'
 
 const App = (props) => {
   useEffect(() => {
@@ -24,6 +25,7 @@ const App = (props) => {
           render={() => (
             <>
               <AddTip />
+              <SearchForm />
               <TipList />
             </>
           )}

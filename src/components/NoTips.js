@@ -1,10 +1,27 @@
 import React from 'react'
-// import { Link } from 'react-router-dom';
+import { connect } from 'react-redux'
 
-const NoTips = () => (
-  <div>
-    <p>Et ole lisännyt vinkkejä vielä</p>
-  </div>
-)
+const NoTips = (props) => {
+  if (props.isSearchActive) {
+    return (
+      <div>
+        <p>Ei hakutuloksia :(</p>
+      </div>
+    )
+  }
 
-export default NoTips
+  return (
+    <div>
+      <p>Et ole lisännyt vinkkejä vielä</p>
+    </div>
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isSearchActive: state.tips.isSearchActive
+  }
+}
+
+const connectedNoTips = connect(mapStateToProps, {})(NoTips)
+export default connectedNoTips
