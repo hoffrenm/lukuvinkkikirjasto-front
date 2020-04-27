@@ -31,7 +31,7 @@ const EditTip = (props) => {
   const checkbox = () => (
     <>
       <div>
-        <label>Merkkaa lukemattomaksi</label>
+        <label>Merkkaa lukemattomaksi poistamalla valinta</label>
         <p>
           <input
             type="checkbox"
