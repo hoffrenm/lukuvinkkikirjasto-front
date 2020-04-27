@@ -6,6 +6,11 @@ const getAll = async () => {
   return response
 }
 
+const getByTitle = async title => {
+  const response = await axios.get(`${baseUrl}/title/${title}`)
+  return response
+}
+
 const create = async newObject => {
   const response = await axios.post(baseUrl, newObject)
   return response
@@ -21,4 +26,4 @@ const read = async id => {
   return response
 }
 
-export default { getAll, create, remove, read }
+export default { getAll, getByTitle, create, remove, read }
