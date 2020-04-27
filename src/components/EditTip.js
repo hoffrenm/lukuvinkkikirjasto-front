@@ -28,7 +28,7 @@ const EditTip = (props) => {
     e.preventDefault()
 
     let tipToUpdate = {
-      title: e.target.title.value,
+      title: e.target.title.value.trim(),
       url: e.target.url.value,
       tags: e.target.tags.value
         .split(',')
