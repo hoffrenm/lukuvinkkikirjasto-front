@@ -1,8 +1,8 @@
-post http://localhost:3000/api/tips
+post http://localhost:5000/api/tips
 Content-Type: application/json
 
 {
-  "title": "Test",
+  "title": "Test2",
   "url": "TEST",
-  "tags": ["t", "tt"]
+  "tags": ["t", "tt","t t"]
 }
