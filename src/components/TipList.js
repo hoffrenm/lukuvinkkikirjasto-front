@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { removeTip } from '../reducers/tipReducer'
+import { removeTip, readTip } from '../reducers/tipReducer'
 import Tip from './Tip'
 import Loading from './Loading'
 import NoTips from './NoTips'
@@ -28,13 +28,17 @@ const TipList = (props) => {
     }
   }
 
+  const readTip = async (tip) => {
+    props.readTip(tip.id)
+  }
+
   return (
     <div>
       <h2>Lukuvinkit</h2>
       <div id="tip-list">
         {tipdata.sort(byDescendingTime).map((tip) => {
           return (
-            <Tip key={tip.id} tip={tip} deleteTip={deleteTip} />
+            <Tip key={tip.id} tip={tip} deleteTip={deleteTip} readTip={readTip} />
           )
         })}
       </div>
@@ -50,5 +54,6 @@ const mapStateToProps = (state) => {
 
 const connectedTipList = connect(mapStateToProps, {
   removeTip,
+  readTip,
 })(TipList)
 export default connectedTipList

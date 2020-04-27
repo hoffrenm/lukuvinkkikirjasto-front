@@ -64,3 +64,8 @@ input[type=text] {
     top: 0;
     right: 0;
 }
+.timestamp-read {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

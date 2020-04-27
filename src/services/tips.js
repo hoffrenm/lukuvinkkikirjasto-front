@@ -21,4 +21,9 @@ const remove = async id => {
   return response
 }
 
-export default { getAll, getByTitle, create, remove }
+const read = async id => {
+  const response = await axios.post(`${baseUrl}/${id}/read`)
+  return response
+}
+
+export default { getAll, getByTitle, create, remove, read }

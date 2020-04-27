@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './Button'
 
-const Tip = ({ tip, deleteTip }) => (
+const Tip = ({ tip, deleteTip, readTip }) => (
 
   <div id="tip-list-item" data-cy="tip-item" key={tip.id} className="tip-list-item">
     <div className="tip-content">
@@ -9,6 +9,12 @@ const Tip = ({ tip, deleteTip }) => (
       <div className="timestamp">
         {tip.createdAt.toLocaleString('fi-FI')}
       </div>
+
+      {tip.read && (
+        <div className="timestamp-read">
+        Luettu {tip.readAt.toLocaleString('fi-FI')}
+        </div>
+      )}
 
       <h3>{tip.title}</h3>
       <a href={tip.url}>{tip.url}</a>
@@ -35,6 +41,15 @@ const Tip = ({ tip, deleteTip }) => (
         type="button"
         cyDataAttribute="remove-tip"
       />
+      {!tip.read && (
+        <Button
+          onClick={() => readTip(tip)}
+          buttonText="Luettu"
+          priority="secondary"
+          type="button"
+          cyDataAttribute="read-tip"
+        />
+      )}
     </div>
   </div>
 )

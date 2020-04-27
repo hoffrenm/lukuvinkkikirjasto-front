@@ -127,6 +127,28 @@ export const removeTip = (id) => {
   }
 }
 
+export const readTip = (id) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'INIT_READ_TIP',
+    })
+
+    try {
+      const result = await tipService.read(id)
+
+      dispatch({
+        type: 'READ_SUCCESS',
+        data: formatTip(result.data),
+      })
+    } catch (error) {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: error.response.data.error,
+      })
+    }
+  }
+}
+
 const initialState = {
   tipdata: [],
   processing: true,
@@ -193,6 +215,20 @@ const tipReducer = (state = initialState, action) => {
         error: null,
         isSearchActive: false
       }
+    case 'INIT_READ_TIP':
+      return {
+        ...state,
+        processing: true,
+      }
+    case 'READ_SUCCESS': {
+      const readTip = action.data
+      return {
+        ...state,
+        tipdata: state.tipdata.map((tip) => tip.id === readTip.id ? readTip : tip),
+        processing: false,
+        error: null,
+      }
+    }
     case 'ACTION_FAIL':
       window.alert(`Toiminto epäonnistui (${action.data})`)
       return {
