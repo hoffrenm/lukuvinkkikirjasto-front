@@ -104,28 +104,6 @@ export const addTip = (tip) => {
   }
 }
 
-export const readTip = (id) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'READ_TIP',
-    })
-
-    try {
-      const result = await tipService.read(id)
-
-      dispatch({
-        type: 'READ_SUCCESS',
-        data: formatTip(result.data),
-      })
-    } catch (error) {
-      dispatch({
-        type: 'ACTION_FAIL',
-        data: error.response.data.error,
-      })
-    }
-  }
-}
-
 export const removeTip = (id) => {
   return async (dispatch) => {
     dispatch({
@@ -261,11 +239,6 @@ const tipReducer = (state = initialState, action) => {
         ...state,
         error: action.data,
         processing: false,
-      }
-    case 'READ_TIP':
-      return {
-        ...state,
-        processing: true,
       }
     default:
       return state
