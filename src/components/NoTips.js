@@ -19,7 +19,7 @@ const NoTips = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSearchActive: state.tips.isSearchActive
+    isSearchActive: state.tips.isSearchActive,
   }
 }
 

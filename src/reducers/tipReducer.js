@@ -192,7 +192,7 @@ const initialState = {
   tipdata: [],
   processing: true,
   error: null,
-  isSearchActive: false
+  isSearchActive: false,
 }
 
 const tipReducer = (state = initialState, action) => {
@@ -200,7 +200,7 @@ const tipReducer = (state = initialState, action) => {
     case 'INIT_GET_TIPS':
       return {
         ...state,
-        processing: true
+        processing: true,
       }
     case 'GET_TIPS_SUCCESS':
       return {
@@ -219,7 +219,7 @@ const tipReducer = (state = initialState, action) => {
         ...state,
         tipdata: state.tipdata.concat(action.data),
         processing: false,
-        error: null
+        error: null,
       }
     case 'INIT_REMOVE_TIP':
       return {
@@ -237,7 +237,7 @@ const tipReducer = (state = initialState, action) => {
       return {
         ...state,
         processing: true,
-        isSearchActive: true
+        isSearchActive: true,
       }
     case 'SEARCH_TIPS_SUCCESS':
       return {
@@ -252,7 +252,7 @@ const tipReducer = (state = initialState, action) => {
         tipdata: action.data,
         processing: false,
         error: null,
-        isSearchActive: false
+        isSearchActive: false,
       }
     case 'INIT_READ_TIP':
       return {

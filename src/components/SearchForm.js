@@ -14,7 +14,7 @@ const SearchForm = (props) => {
     e.preventDefault()
     tag.reset()
     props.searchByTerms({
-      title: title.value.trim()
+      title: title.value.trim(),
     })
   }
 
@@ -22,7 +22,7 @@ const SearchForm = (props) => {
     e.preventDefault()
     title.reset()
     props.searchByTag({
-      tag: tag.value.trim()
+      tag: tag.value.trim(),
     })
   }
 
@@ -57,14 +57,14 @@ const SearchForm = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    isSearchActive: state.tips.isSearchActive
+    isSearchActive: state.tips.isSearchActive,
   }
 }
 
 const connectedSearchForm = connect(mapStateToProps, {
   searchByTerms,
   searchByTag,
-  removeSearchFilter
+  removeSearchFilter,
 })(SearchForm)
 
 export default connectedSearchForm
