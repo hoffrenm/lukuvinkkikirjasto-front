@@ -131,6 +131,24 @@ export const removeTip = (id) => {
   }
 }
 
+export const updateTip = (id, tip) => {
+  return async (dispatch) => {
+    try {
+      const result = await tipService.update(id, tip)
+
+      dispatch({
+        type: 'UPDATE_TIP',
+        data: formatTip(result.data),
+      })
+    } catch (error) {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: error.response.data.error,
+      })
+    }
+  }
+}
+
 export const readTip = (id) => {
   return async (dispatch) => {
     dispatch({
@@ -157,7 +175,7 @@ const initialState = {
   tipdata: [],
   processing: true,
   error: null,
-  isSearchActive: false
+  isSearchActive: false,
 }
 
 const tipReducer = (state = initialState, action) => {
@@ -165,7 +183,7 @@ const tipReducer = (state = initialState, action) => {
     case 'INIT_GET_TIPS':
       return {
         ...state,
-        processing: true
+        processing: true,
       }
     case 'GET_TIPS_SUCCESS':
       return {
@@ -184,7 +202,7 @@ const tipReducer = (state = initialState, action) => {
         ...state,
         tipdata: state.tipdata.concat(action.data),
         processing: false,
-        error: null
+        error: null,
       }
     case 'INIT_REMOVE_TIP':
       return {
@@ -202,7 +220,7 @@ const tipReducer = (state = initialState, action) => {
       return {
         ...state,
         processing: true,
-        isSearchActive: true
+        isSearchActive: true,
       }
     case 'SEARCH_TIPS_SUCCESS':
       return {
@@ -217,7 +235,7 @@ const tipReducer = (state = initialState, action) => {
         tipdata: action.data,
         processing: false,
         error: null,
-        isSearchActive: false
+        isSearchActive: false,
       }
     case 'INIT_READ_TIP':
       return {
@@ -228,9 +246,20 @@ const tipReducer = (state = initialState, action) => {
       const readTip = action.data
       return {
         ...state,
-        tipdata: state.tipdata.map((tip) => tip.id === readTip.id ? readTip : tip),
+        tipdata: state.tipdata.map((tip) =>
+          tip.id === readTip.id ? readTip : tip
+        ),
         processing: false,
         error: null,
+      }
+    }
+    case 'UPDATE_TIP': {
+      const updatedTip = action.data
+      return {
+        ...state,
+        tipdata: state.tipdata.map((tip) =>
+          tip.id !== updatedTip.id ? tip : updatedTip
+        ),
       }
     }
     case 'ACTION_FAIL':
