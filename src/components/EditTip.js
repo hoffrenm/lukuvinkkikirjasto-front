@@ -25,7 +25,6 @@ const EditTip = (props) => {
     }
 
     props.updateTip(props.tip.id, tipToUpdate)
-
     history.push('/')
   }
 
