@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import tipReducer from './reducers/tipReducer'
 
 const reducer = combineReducers({
-  tips: tipReducer
+  tips: tipReducer,
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

@@ -59,6 +59,41 @@ export const searchByTerms = (termData) => {
   }
 }
 
+export const searchByTag = (termData) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'INIT_SEARCH_TIPS',
+    })
+
+    let result
+
+    try {
+      if (termData.tag.length === 0) {
+        result = await tipService.getAll()
+      } else {
+        result = await tipService.getByTag(termData.tag)
+      }
+    } catch (error) {
+      result = error
+    }
+
+    if (result.status === 200) {
+      const formattedTips = result.data.map(formatTip)
+
+      dispatch({
+        type: 'SEARCH_TIPS_SUCCESS',
+        data: formattedTips,
+      })
+    } else {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: result,
+      })
+    }
+  }
+}
+
+
 export const removeSearchFilter = () => {
   return async (dispatch) => {
     dispatch({
@@ -157,7 +192,7 @@ const initialState = {
   tipdata: [],
   processing: true,
   error: null,
-  isSearchActive: false
+  isSearchActive: false,
 }
 
 const tipReducer = (state = initialState, action) => {
@@ -165,7 +200,7 @@ const tipReducer = (state = initialState, action) => {
     case 'INIT_GET_TIPS':
       return {
         ...state,
-        processing: true
+        processing: true,
       }
     case 'GET_TIPS_SUCCESS':
       return {
@@ -184,7 +219,7 @@ const tipReducer = (state = initialState, action) => {
         ...state,
         tipdata: state.tipdata.concat(action.data),
         processing: false,
-        error: null
+        error: null,
       }
     case 'INIT_REMOVE_TIP':
       return {
@@ -202,7 +237,7 @@ const tipReducer = (state = initialState, action) => {
       return {
         ...state,
         processing: true,
-        isSearchActive: true
+        isSearchActive: true,
       }
     case 'SEARCH_TIPS_SUCCESS':
       return {
@@ -217,7 +252,7 @@ const tipReducer = (state = initialState, action) => {
         tipdata: action.data,
         processing: false,
         error: null,
-        isSearchActive: false
+        isSearchActive: false,
       }
     case 'INIT_READ_TIP':
       return {
