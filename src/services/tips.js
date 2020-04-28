@@ -6,6 +6,11 @@ const getAll = async () => {
   return response
 }
 
+const getAllUnread = async () => {
+  const response = await axios.get(`${baseUrl}/tips/unread`)
+  return response
+}
+
 const getByTitle = async title => {
   const response = await axios.get(`${baseUrl}/tips/title/${title}`)
   return response
@@ -42,4 +47,4 @@ const read = async id => {
   return response
 }
 
-export default { getAll, getByTitle, getByTag, getById, create, remove, update, read }
+export default { getAll, getAllUnread, getByTitle, getByTag, getById, create, remove, update, read }

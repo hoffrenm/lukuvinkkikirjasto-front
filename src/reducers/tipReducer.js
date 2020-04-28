@@ -30,6 +30,34 @@ export const initTips = () => {
   }
 }
 
+export const searchUnreadedTips = (termData) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'INIT_SEARCH_TIPS',
+    })
+
+    try {
+      let result
+
+      if (termData.unreadedTips) {
+        result = await tipService.getAllUnread()
+      } else {
+        result = await tipService.getAll()
+      }
+
+      dispatch({
+        type: 'SEARCH_TIPS_SUCCESS',
+        data: result.data.map(formatTip),
+      })
+    } catch (error) {
+      dispatch({
+        type: 'ACTION_FAIL',
+        data: error.response.data.error,
+      })
+    }
+  }
+}
+
 export const searchByTerms = (termData) => {
   return async (dispatch) => {
     dispatch({
