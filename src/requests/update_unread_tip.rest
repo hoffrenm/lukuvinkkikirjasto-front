@@ -4,7 +4,5 @@ Content-Type: application/json
 {
   "title": "A",
   "url": "",
-  "read": false,
-  "readAt": null,
   "tags": []
 }
